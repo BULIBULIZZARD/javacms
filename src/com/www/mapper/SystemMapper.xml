@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace表示命名空间 -->
+<mapper namespace="com.www.mapper.SystemMapper">
+	<select id="getall"  resultType="system">
+		select * from cms_system where id =1
+	</select>
+	<update id="update" parameterType="system">
+		update cms_system
+		set webname=#{webname},
+			frontpagesize=#{frontpagesize},
+			pagesize=#{pagesize},
+			navnum=#{navnum},
+			linknum=#{linknum},
+			advernum=#{advernum}
+		where
+		id=1
+	</update>
+	<select id="getpagesize" resultType="int">
+		select pagesize from cms_system where id =1 
+	</select>
+	<select id="getfrontpagesize" resultType="int">
+		select frontpagesize from cms_system where id =1 
+	</select>
+	<select id="getnavnum" resultType="int">
+		select navnum from cms_system where id =1 
+	</select>
+	<select id="getwebname" resultType="string">
+		select webname from cms_system where id =1 
+	</select>
+	<select id="getlinknum" resultType="int">
+		select linknum from cms_system where id =1 
+	</select>
+	<select id="getadvernum" resultType="int">
+		select advernum from cms_system where id =1 
+	</select>
+</mapper>

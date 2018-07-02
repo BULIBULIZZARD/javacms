@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace表示命名空间 -->
+<mapper namespace="com.www.mapper.AdverMapper">
+	<insert id="add" parameterType="adver">
+		insert into cms_adver (title,url,create_time) 
+		value (#{title},#{url},#{create_time})
+	</insert>
+	
+
+	<select id="selectLimitAdver" parameterType="int" resultType="adver">
+		Select * from cms_adver where status=1 order by listorder desc , id desc limit #{arg0},#{arg1}
+	</select>
+	<select id="getTotal" resultType="String">
+		select count(*) from cms_adver where status=1
+	</select>
+	<update id="listorder" parameterType="adver">
+		update cms_adver
+		set listorder=#{listorder}
+		where
+		id=#{id}
+	</update>
+	<update id="delete" parameterType="int">
+		update cms_adver set status=0 where id=#{arg0}
+	</update>
+	<select id="checkid" resultType="int">
+		select count(*) from cms_adver where status=1 and id=#{arg0} limit 1
+	</select>
+	<select id="getOneAdverById" parameterType="int" resultType="adver">
+		select * from cms_adver where id=#{arg0} limit 1
+	</select>
+	<select id="getIndexAdver" parameterType="int" resultType="adver">
+		select * from cms_adver order by listorder desc,id desc limit #{arg0}
+	</select>
+	<update id="edit" parameterType="adver">
+		update cms_adver 
+		set title=#{title},url=#{url}
+		where id=#{id}
+	</update>
+</mapper>

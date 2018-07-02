@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace表示命名空间 -->
+<mapper namespace="com.www.mapper.CommentMapper">
+	<insert id="add" parameterType="comment">
+		insert into cms_comment (username,article_id,userid,context,create_time) 
+		value (#{username},#{article_id},#{userid},#{context},#{create_time})
+	</insert>
+	<select id="showCommentByArticleId" parameterType="int" resultType="comment">
+		select * from cms_comment where article_id=#{arg0} and status=1 order by id desc
+	</select>
+	
+
+	<select id="selectLimitComment" parameterType="int" resultType="comment">
+		Select * from cms_comment where status=1 order by  id desc limit #{arg0},#{arg1}
+	</select>
+	<select id="getTotal" resultType="String">
+		select count(*) from cms_comment where status=1
+	</select>
+	<update id="listorder" parameterType="user">
+		update cms_user
+		set listorder=#{listorder}
+		where
+		id=#{id}
+	</update>
+	<update id="delete" parameterType="int">
+		update cms_comment set status=0 where id=#{arg0}
+	</update>
+	
+</mapper>

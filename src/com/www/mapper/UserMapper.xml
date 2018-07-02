@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace表示命名空间 -->
+<mapper namespace="com.www.mapper.UserMapper">
+	<insert id="register" parameterType="user">
+		insert into cms_user (username,password,uniquecode,email,qq,create_time) 
+		value (#{username},#{password},#{uniquecode},#{email},#{qq},#{create_time})
+	</insert>
+	<select id="checkusername" parameterType="String" resultType="int">
+		select count(*) from cms_user where username=#{username} limit 1
+	</select>
+	<select id="checkcookie" parameterType="String" resultType="int">
+		select count(*) from cms_user where username=#{username} and uniquecode=#{uniquecode} and status=1 limit 1
+	</select>
+	<select id="checklogin" parameterType="user" resultType="int">
+		select count(*) from cms_user where username=#{username} and #{password} and status=1 limit 1
+	</select>
+	<select id="getuserdata" parameterType="String" resultType="user">
+		select * from cms_user where username=#{username}  and status=1 limit 1
+	</select>
+	<select id="selectlimituser" parameterType="int" resultType="user">
+		Select * from cms_user where status=1 order by listorder desc, id desc limit #{arg0},#{arg1}
+	</select>
+	<select id="getTotal" resultType="String">
+		select count(*) from cms_user where status=1
+	</select>
+	<update id="listorder" parameterType="user">
+		update cms_user
+		set listorder=#{listorder}
+		where
+		id=#{id}
+	</update>
+	<update id="del" parameterType="user">
+		update cms_user set status=0 where id=#{id}
+	</update>
+</mapper>

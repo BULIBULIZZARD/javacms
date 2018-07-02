@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace表示命名空间 -->
+<mapper namespace="com.www.mapper.CategoryMapper">
+	<select id="selectallcate" resultType="category">
+		select * from cms_category where status=1 and parent_id=0 order by listorder desc 
+	</select>
+	<select id="selectcatebypid" parameterType="int" resultType="category">
+		select * from cms_category where status=1 and parent_id=#{arg0} order by listorder desc 
+	</select>
+	<select id="getonecategory" parameterType="int" resultType="category">
+		select * from cms_category where status=1 and id=#{arg0} limit 1
+	</select>
+	<select id="checkid" parameterType="int" resultType="int">
+		select count(*) from cms_category where status=1 and id=#{arg0} limit 1
+	</select>
+	<select id="selectlimitcate" parameterType="int" resultType="category">
+		select * from cms_category where status=1 and parent_id=#{arg2} order by listorder desc limit #{arg0},#{arg1}
+	</select>
+	<select id="getparent_id" parameterType="int" resultType="int">
+		select parent_id from cms_category where id=#{arg0} limit 1
+	</select>
+	<insert id="add" parameterType="category">
+		insert into
+		cms_category(name,parent_id,status,create_time)
+		value(#{name},#{parent_id},#{status},#{create_time})
+	</insert>
+	<update id="edit" parameterType="category">
+		update cms_category
+		set name=#{name}, parent_id=#{parent_id}
+		where
+		id=#{id}
+	</update>
+	<update id="listorder" parameterType="category">
+		update cms_category
+		set listorder=#{listorder}
+		where
+		id=#{id}
+	</update>
+	<select id="getTotal"  resultType="String">
+		select count(*) from cms_category where status=1 and parent_id=0
+	</select>
+	<update id="delete" parameterType="int">
+		update cms_category set status=0 where id=#{arg0}
+	</update>
+	<select id="showcate"  parameterType="int" resultType="category">
+		select id,name from cms_category where status=1 and parent_id=0 order by listorder desc limit #{arg0}
+	</select>
+	<select id="getNameById"  parameterType="int" resultType="string">
+		select name from cms_category where id=#{id} limit 1
+	</select>
+</mapper>

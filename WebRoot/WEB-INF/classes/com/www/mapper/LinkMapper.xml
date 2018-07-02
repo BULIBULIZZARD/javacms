@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace表示命名空间 -->
+<mapper namespace="com.www.mapper.LinkMapper">
+	<insert id="add" parameterType="link">
+		insert into cms_link (name,link,create_time) 
+		value (#{name},#{link},#{create_time})
+	</insert>
+
+	<select id="selectLimitLink" parameterType="int" resultType="link">
+		Select * from cms_link where status=1 order by listorder desc, id desc limit #{arg0},#{arg1}
+	</select>
+	<select id="getTotal" resultType="String">
+		select count(*) from cms_link where status=1
+	</select>
+	<update id="listorder" parameterType="link">
+		update cms_link
+		set listorder=#{listorder}
+		where
+		id=#{id}
+	</update>
+	<select id="checkid" resultType="int">
+		select count(*) from cms_link where status=1 and id=#{arg0} limit 1
+	</select>
+	<update id="delete" parameterType="int">
+		update cms_link set status=0 where id=#{arg0}
+	</update>
+	<select id="getOneLinkById" parameterType="int" resultType="link">
+		select * from cms_link where id=#{arg0} limit 1
+	</select>
+	<select id="getIndexLink" parameterType="int" resultType="link">
+		select * from cms_link order by listorder desc,id desc limit #{arg0}
+	</select>
+	<update id="edit" parameterType="link">
+		update cms_link 
+		set name=#{name},link=#{link}
+		where id=#{id}
+	</update>
+</mapper>

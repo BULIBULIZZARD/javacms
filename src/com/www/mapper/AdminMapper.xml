@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace表示命名空间 -->
+<mapper namespace="com.www.mapper.AdminMapper">
+	<insert id="add" parameterType="admin">
+		insert into
+		cms_admin(username,password,create_time,status)
+		value(#{username},#{password},#{create_time},#{status})
+	</insert>
+	<update id="del" parameterType="admin">
+		update cms_admin set status=0 where id=#{id}
+	</update>
+	<select id="checkusername" parameterType="admin" resultType="int">
+		select count(*) from cms_admin where username=#{username} limit 1
+	</select>
+	<select id="login" parameterType="admin" resultType="int">
+		select count(*) from cms_admin where username=#{username} and password=#{password} and status=1 limit 1
+	</select>
+	<select id="checkid" parameterType="int" resultType="int">
+		select count(*) from cms_admin where id=#{arg0} and status=1 limit 1
+	</select>
+	<select id="getoneadmin" parameterType="int" resultType="admin">
+		select * from cms_admin where id=#{arg0} limit 1
+	</select>
+	<select id="selectlimitadmin" parameterType="int" resultType="admin">
+		Select * from cms_admin where status=1 order by listorder desc, id desc limit #{arg0},#{arg1}
+	</select>
+	<select id="getTotal" resultType="String">
+		select count(*) from cms_admin where status=1
+	</select>
+	<update id="listorder" parameterType="admin">
+		update cms_admin
+		set listorder=#{listorder}
+		where
+		id=#{id}
+	</update>
+	<update id="update" parameterType="admin">
+		update cms_admin
+		set username=#{username},password=#{password}
+		where
+		id=#{id}
+	</update>
+	<update id="updateusername" parameterType="admin">
+		update cms_admin
+		set username=#{username}
+		where
+		id=#{id}
+	</update>
+</mapper>

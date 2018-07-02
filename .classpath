@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="config"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_5_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="D:/MyEclipse2016/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201608181231/tomcat70/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="D:/MyEclipse2016/plugins/javax.servlet.jsp_2.0.0.v201101211617.jar"/>
+	<classpathentry kind="lib" path="D:/MyEclipse2016/plugins/javax.servlet.jsp.jstl_1.2.0.v201105211821.jar"/>
+	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
+</classpath>
